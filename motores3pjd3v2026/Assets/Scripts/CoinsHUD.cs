@@ -3,11 +3,14 @@ using TMPro;
 
 public class CoinsHUD : MonoBehaviour
 {
-    [SerializeField] private TMP_Text coinText;
+    [SerializeField] private TMP_Text coinText; 
 
     private void Start()
     {
-        UpdateCoinDisplay(PlayerObserverManager.GetCurrentCoins());
+        if (coinText != null)
+        {
+            coinText.text = "Moedas: 0";
+        }
     }
 
     private void OnEnable()

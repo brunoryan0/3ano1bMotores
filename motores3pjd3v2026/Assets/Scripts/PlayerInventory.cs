@@ -4,14 +4,19 @@ public class PlayerInventory : MonoBehaviour
 {
     private int coinsCount = 0;
 
-    private void Start()
+    private void OnEnable()
     {
-        PlayerObserverManager.ResetCoins();
+        PlayerObserverManager.OnCoinTriggered += AddCoin;
     }
 
-    public void AddCoin()
+    private void OnDisable()
+    {
+        PlayerObserverManager.OnCoinTriggered -= AddCoin;
+    }
+
+    private void AddCoin()
     {
         coinsCount++;
-        PlayerObserverManager.SendCoinCollected(coinsCount);
+        PlayerObserverManager.NotifyCoinCollected(coinsCount);
     }
 }

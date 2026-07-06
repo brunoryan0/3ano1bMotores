@@ -9,15 +9,10 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.attachedRigidbody != null)
+        if (other.CompareTag("Player") || (other.attachedRigidbody != null && other.attachedRigidbody.CompareTag("Player")))
         {
-            PlayerInventory inventory = other.attachedRigidbody.GetComponent<PlayerInventory>();
-
-            if (inventory != null)
-            {
-                inventory.AddCoin();
-                Destroy(gameObject);
-            }
+            PlayerObserverManager.NotifyCoinTriggered();
+            Destroy(gameObject);
         }
     }
 }
